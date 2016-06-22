@@ -7,7 +7,7 @@
             <generator strategy="AUTO"/>
         </id>
         <field name="name" type="string" length="128"/>
-        <field name="zipCode" type="string" length="10"/>
+        <field name="zipCode" type="string" length="16"/>
         <field name="latitude" type="float"/>
         <field name="longitude" type="float"/>
 
