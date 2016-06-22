@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <entity name="Vlabs\AddressBundle\Entity\City" repository-class="Vlabs\AddressBundle\Entity\CityRepository" table="address_city">
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+        <field name="name" type="string" length="128"/>
+        <field name="zipCode" type="string" length="10"/>
+        <field name="latitude" type="float"/>
+        <field name="longitude" type="float"/>
+
+        <many-to-one field="department" target-entity="Department" inversed-by="cities"/>
+
+    </entity>
+
+</doctrine-mapping>

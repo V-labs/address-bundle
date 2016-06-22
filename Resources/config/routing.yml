@@ -1,0 +1,3 @@
+vlabs_address_get_cities:
+    path: /cities.json
+    defaults: { _controller: VlabsAddressBundle:City:getCities }

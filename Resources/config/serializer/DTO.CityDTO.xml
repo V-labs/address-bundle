@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\CityDTO" exclusion-policy="ALL" xml-root-name="city">
+        <property name="id" expose="true" type="integer"/>
+        <property name="name" expose="true" type="string"/>
+        <property name="zipCode" expose="true" type="string"/>
+        <property name="latitude" expose="true" type="float"/>
+        <property name="longitude" expose="true" type="float"/>
+    </class>
+</serializer>
