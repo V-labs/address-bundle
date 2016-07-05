@@ -49,8 +49,7 @@ $(function(){
                     return {
                         results: data['cities']
                     };
-                }).bind(this),
-                cache: true
+                }).bind(this)
             }
         });
 

@@ -18,7 +18,7 @@ class CityController extends FOSRestController
         $cityRepository = $this->get('doctrine.orm.entity_manager')
             ->getRepository('VlabsAddressBundle:City');
 
-        $cities = $cityRepository->findBySearch($search);
+        $cities = $cityRepository->searchByZipCode($search);
 
         $cityList = (new CityListDTO())->fillFromArray($cities);
 

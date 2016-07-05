@@ -7,21 +7,18 @@ use Doctrine\ORM\EntityRepository;
 class CityRepository extends EntityRepository
 {
     /**
-     * @param $search
+     * @param $zipCode
      * @return array
      */
-    public function findBySearch($search)
+    public function searchByZipCode($zipCode)
     {
         $qb = $this->_em->createQueryBuilder();
 
         $qb
             ->select('c')
             ->from($this->_entityName, 'c')
-            ->where($qb->expr()->orX(
-                'c.name LIKE :search',
-                'c.zipCode LIKE :search'
-            ))
-            ->setParameter('search', sprintf('%s%%', $search))
+            ->where('c.zipCode LIKE :zipCode')
+            ->setParameter('zipCode', sprintf('%s%%', $zipCode))
             ->orderBy('c.zipCode', 'ASC')
             ->addOrderBy('c.name', 'ASC')
             ->setMaxResults(50)

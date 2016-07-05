@@ -73,7 +73,7 @@ class InstallCommand extends ContainerAwareCommand
                 if ($this->isCityImportAllowed($csvCityZipCode) && !empty($csvCityZipCode)) {
                     $city = new City();
                     $city->setName($csvCity);
-                    $city->setZipCode($csvCityZipCode);
+                    $city->setZipCode(sprintf("%05d", $csvCityZipCode));
                     $city->setLatitude($csvCityLatitude);
                     $city->setLongitude($csvCityLongitude);
                     $city->setDepartment($departments[array_search($csvDepartment, $csvDepartments)]);
