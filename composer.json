@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.3.9",
         "symfony/symfony": "2.8.*",
-        "friendsofsymfony/rest-bundle": "^1.7",
-        "jms/serializer-bundle": "^1.1"
+        "friendsofsymfony/rest-bundle": "~1.7",
+        "jms/serializer-bundle": "~1.1"
     }
 }
