@@ -11,12 +11,16 @@ use Vlabs\AddressBundle\Entity\City;
 use Vlabs\AddressBundle\Entity\Country;
 use Vlabs\AddressBundle\Entity\Department;
 use Vlabs\AddressBundle\Entity\Region;
+use Symfony\Component\Console\Input\InputOption;
 
 class InstallCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('vlabs:address:install');
+        $this
+            ->setName('vlabs:address:install')
+            ->addOption('limit', null, InputOption::VALUE_OPTIONAL)
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -40,7 +44,12 @@ class InstallCommand extends ContainerAwareCommand
             $regions = $departments = [];
             $csvRegions = $csvDepartments = [];
 
+            $i=1;
             foreach ($data as $row) {
+
+                if($input->getOption('limit') && $i == intval($input->getOption('limit'))){
+                    break;
+                }
 
                 $csvRegion = $row[3];
                 $csvDepartment = $row[5];
@@ -79,6 +88,7 @@ class InstallCommand extends ContainerAwareCommand
                     $city->setDepartment($departments[array_search($csvDepartment, $csvDepartments)]);
                     $this->getContainer()->get('doctrine.orm.entity_manager')->persist($city);
                 }
+                $i++;
             }
 
         }
