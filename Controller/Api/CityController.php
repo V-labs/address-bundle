@@ -1,6 +1,6 @@
 <?php
 
-namespace Vlabs\AddressBundle\Controller;
+namespace Vlabs\AddressBundle\Controller\Api;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;

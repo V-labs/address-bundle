@@ -1,0 +1,5 @@
+Vlabs\AddressBundle\Entity\Address:
+    properties:
+        street:
+            - NotBlank: ~
+            - NotNull: ~

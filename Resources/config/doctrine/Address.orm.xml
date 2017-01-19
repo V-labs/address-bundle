@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="Vlabs\AddressBundle\Entity\Address" table="vlabs_address_address">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="street" type="string" column="street" length="255"/>
+        <field name="street2" type="string" column="street2" length="255" nullable="true"/>
+        <field name="latitude" type="float" nullable="true"/>
+        <field name="longitude" type="float" nullable="true"/>
+
+        <many-to-one field="country" target-entity="Vlabs\AddressBundle\Entity\Country" />
+
+    </entity>
+</doctrine-mapping>

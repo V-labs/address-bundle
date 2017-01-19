@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\DepartmentDTO" exclusion-policy="ALL" xml-root-name="department">
+        <property name="id" expose="true" type="integer"/>
+        <property name="name" expose="true" type="string"/>
+        <property name="code" expose="true" type="string"/>
+    </class>
+</serializer>

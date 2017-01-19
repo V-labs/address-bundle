@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\DepartmentListDTO" exclusion-policy="ALL" xml-root-name="department_list">
+        <property name="departments" expose="true">
+            <type><![CDATA[array<Vlabs\AddressBundle\DTO\DepartmentDTO>]]></type>
+        </property>
+    </class>
+</serializer>

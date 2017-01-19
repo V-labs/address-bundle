@@ -1,5 +1,10 @@
 vlabs_address_get_cities:
-    path: /cities.json
-    defaults: { _controller: VlabsAddressBundle:City:getCities }
+    path: /cities
+    defaults: { _controller: VlabsAddressBundle:Api/City:getCities }
     options:
         expose: true
+
+vlabs_address_get_departments:
+    path: /departments
+    defaults: { _controller: VlabsAddressBundle:Api/Department:getDepartments }
+    methods: GET
