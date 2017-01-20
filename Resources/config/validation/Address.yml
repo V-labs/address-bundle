@@ -3,9 +3,6 @@ Vlabs\AddressBundle\Entity\Address:
         street:
             - NotBlank: ~
             - NotNull: ~
-        postcode:
-            - NotBlank: ~
-            - NotNull: ~
         city:
             - NotBlank: ~
             - NotNull: ~
