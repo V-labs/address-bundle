@@ -42,7 +42,7 @@ $(function(){
                     if (data['cities']) {
                         for (var x in data['cities']) {
                             var city = data['cities'][x];
-                            city['id'] = city['zip_code'];
+                            city['id'] = city['id'];
                             city['text'] = city['zip_code'] + ' (' + city['name'] + ')';
                         }
                     }
