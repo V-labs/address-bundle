@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use Symfony\Component\Debug\Exception\ContextErrorException;
 use Vlabs\AddressBundle\Exception\InvalidParameterException;
-use Vlabs\AddressBundle\Exception\UnableToGetGeocodingResultException;
+use Vlabs\AddressBundle\Exception\NoGeocodingFoundForAddressException;
 use Vlabs\AddressBundle\Exception\UnableToParseGeocodingJsonReponseException;
 use Vlabs\AddressBundle\VO\CoordinatesVO;
 
@@ -41,11 +41,11 @@ class GeocoderService
     public function geocode($address)
     {
         if(empty($this->googleApiKey)){
-            throw new InvalidParameterException('You must provide a Google Api Key to use the Geocoder.');
+            throw new InvalidParameterException('You must provide the "google_api_key" parameter to use the Geocoder.');
         }
 
         if(empty($this->geocoderBaseUrl)){
-            throw new InvalidParameterException('You must provide the Google geocoder base url.');
+            throw new InvalidParameterException('You must provide the "google_geocoder_base_url" parameter to use the Geocoder.');
         }
 
         // todo: Move to bundle conf
@@ -72,7 +72,7 @@ class GeocoderService
     /**
      * @param $jsonResponse
      * @return CoordinatesVO
-     * @throws UnableToGetGeocodingResultException
+     * @throws NoGeocodingFoundForAddressException
      * @throws UnableToParseGeocodingJsonReponseException
      */
     private function resolveCoordinates($jsonResponse)
@@ -81,7 +81,7 @@ class GeocoderService
 
         if($data->status != 'OK')
         {
-            throw new UnableToGetGeocodingResultException($data->status);
+            throw new NoGeocodingFoundForAddressException($data->status);
         }
 
         try{
