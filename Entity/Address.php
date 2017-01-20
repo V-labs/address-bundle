@@ -38,12 +38,7 @@ class Address
     private $country;
 
     /**
-     * @var string
-     */
-    private $postcode;
-
-    /**
-     * @var string
+     * @var \Vlabs\AddressBundle\Entity\City
      */
     private $city;
 
@@ -178,37 +173,13 @@ class Address
     }
 
     /**
-     * Set postcode
-     *
-     * @param string $postcode
-     *
-     * @return Address
-     */
-    public function setPostcode($postcode)
-    {
-        $this->postcode = $postcode;
-
-        return $this;
-    }
-
-    /**
-     * Get postcode
-     *
-     * @return string
-     */
-    public function getPostcode()
-    {
-        return $this->postcode;
-    }
-
-    /**
      * Set city
      *
-     * @param string $city
+     * @param \Vlabs\AddressBundle\Entity\City $city
      *
      * @return Address
      */
-    public function setCity($city)
+    public function setCity(\Vlabs\AddressBundle\Entity\City $city = null)
     {
         $this->city = $city;
 
@@ -218,7 +189,7 @@ class Address
     /**
      * Get city
      *
-     * @return string
+     * @return \Vlabs\AddressBundle\Entity\City
      */
     public function getCity()
     {

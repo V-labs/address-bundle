@@ -8,6 +8,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vlabs\AddressBundle\Entity\Address;
+use Vlabs\AddressBundle\Entity\City;
 use Vlabs\AddressBundle\Entity\Country;
 
 class AddressType extends AbstractType
@@ -23,8 +24,10 @@ class AddressType extends AbstractType
             ->add('street2', TextType::class, [
                 'required' => false
             ])
-            ->add('postcode', TextType::class)
-            ->add('city', TextType::class)
+            ->add('city', EntityType::class, [
+                'class' => City::class,
+                'choices' => []
+            ])
             ->add('country', EntityType::class, [
                 'class' => Country::class,
                 'choice_label' => 'abbreviation'
