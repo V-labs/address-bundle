@@ -5,10 +5,17 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+
         <service id="vlabs_address.service.geocoder" class="Vlabs\AddressBundle\Service\GeocoderService">
             <argument></argument>
             <argument></argument>
         </service>
+
+        <service id="vlabs_address.form_type.address" class="Vlabs\AddressBundle\Form\Type\AddressType">
+            <argument type="expression">service('doctrine').getRepository('VlabsAddressBundle:City')</argument>
+            <tag name="form.type" />
+        </service>
+
     </services>
     
 </container>
