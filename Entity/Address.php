@@ -38,6 +38,16 @@ class Address
     private $country;
 
     /**
+     * @var string
+     */
+    private $postcode;
+
+    /**
+     * @var string
+     */
+    private $city;
+
+    /**
      * Get id
      *
      * @return int
@@ -165,5 +175,53 @@ class Address
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set postcode
+     *
+     * @param string $postcode
+     *
+     * @return Address
+     */
+    public function setPostcode($postcode)
+    {
+        $this->postcode = $postcode;
+
+        return $this;
+    }
+
+    /**
+     * Get postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->postcode;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Address
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

@@ -14,6 +14,8 @@
         <field name="street2" type="string" column="street2" length="255" nullable="true"/>
         <field name="latitude" type="float" nullable="true"/>
         <field name="longitude" type="float" nullable="true"/>
+        <field name="postcode" type="string" length="255" nullable="true"/>
+        <field name="city" type="string" length="255" nullable="true"/>
 
         <many-to-one field="country" target-entity="Vlabs\AddressBundle\Entity\Country" />
 
