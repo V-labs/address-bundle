@@ -24,5 +24,17 @@ class VlabsAddressExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        if(isset($config['geocoder']))
+        {
+            $geocoder = $container->getDefinition('vlabs_address.service.geocoder');
+
+            if(isset($config['geocoder']['google_api_key'])){
+                $geocoder->replaceArgument(0, $config['geocoder']['google_api_key']);
+            }
+            if(isset($config['geocoder']['google_geocoder_base_url'])){
+                $geocoder->replaceArgument(1, $config['geocoder']['google_geocoder_base_url']);
+            }
+        }
     }
 }

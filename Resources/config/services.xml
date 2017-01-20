@@ -6,8 +6,8 @@
 
     <services>
         <service id="vlabs_address.service.geocoder" class="Vlabs\AddressBundle\Service\GeocoderService">
-            <argument>%google_api_key%</argument>
-            <argument>%google_geocoder_base_url%</argument>
+            <argument></argument>
+            <argument></argument>
         </service>
     </services>
     
