@@ -15,7 +15,6 @@
         <field name="latitude" type="float" nullable="true"/>
         <field name="longitude" type="float" nullable="true"/>
 
-        <many-to-one field="country" target-entity="Vlabs\AddressBundle\Entity\Country" />
         <many-to-one field="city" target-entity="Vlabs\AddressBundle\Entity\City" />
 
     </entity>

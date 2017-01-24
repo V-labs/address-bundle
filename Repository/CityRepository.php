@@ -1,11 +1,31 @@
 <?php
 
-namespace Vlabs\AddressBundle\Entity;
+namespace Vlabs\AddressBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
-
-class CityRepository extends EntityRepository
+class CityRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @return int
+     */
+    public function getCount()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('COUNT(c.id)')
+            ->getQuery()->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIds()
+    {
+        return $this->createQueryBuilder('c')
+            ->select('c.id')
+            ->getQuery()->getResult()
+        ;
+    }
+
     /**
      * @param $zipCode
      * @return array

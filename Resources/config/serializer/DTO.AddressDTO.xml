@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\AddressDTO" exclusion-policy="ALL">
+        <property name="id" expose="true" type="integer" />
+        <property name="street" expose="true" type="string" groups="directory"/>
+        <property name="street2" expose="true" type="string" groups="directory"/>
+        <property name="zipCode" expose="true" type="string" groups="directory"/>
+        <property name="city" expose="true" type="string" groups="directory"/>
+        <property name="department" expose="true" type="string" groups="directory"/>
+        <property name="latitude" expose="true" type="float" groups="directory"/>
+        <property name="longitude" expose="true" type="float" groups="directory"/>
+    </class>
+</serializer>

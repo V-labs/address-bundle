@@ -40,10 +40,6 @@ class AddressType extends AbstractType
                 'required' => false
             ])
             ->add('city', TextType::class)
-            ->add('country', EntityType::class, [
-                'class' => Country::class,
-                'choice_label' => 'abbreviation'
-            ])
         ;
 
         $builder->get('city')->addModelTransformer(new CityDataTransformer($this->cityRepo));

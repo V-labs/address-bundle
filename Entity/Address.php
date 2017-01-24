@@ -33,11 +33,6 @@ class Address
     private $longitude;
 
     /**
-     * @var \Vlabs\AddressBundle\Entity\Country
-     */
-    private $country;
-
-    /**
      * @var \Vlabs\AddressBundle\Entity\City
      */
     private $city;
@@ -146,30 +141,6 @@ class Address
     public function getLongitude()
     {
         return $this->longitude;
-    }
-
-    /**
-     * Set country
-     *
-     * @param \Vlabs\AddressBundle\Entity\Country $country
-     *
-     * @return Address
-     */
-    public function setCountry(\Vlabs\AddressBundle\Entity\Country $country = null)
-    {
-        $this->country = $country;
-
-        return $this;
-    }
-
-    /**
-     * Get country
-     *
-     * @return \Vlabs\AddressBundle\Entity\Country
-     */
-    public function getCountry()
-    {
-        return $this->country;
     }
 
     /**
