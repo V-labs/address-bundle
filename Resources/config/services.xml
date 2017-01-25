@@ -16,11 +16,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="vlabs_address.data_provider.city" class="Vlabs\AddressBundle\DataProvider\CityProvider">
-            <argument type="expression">service('doctrine').getRepository('VlabsAddressBundle:City')</argument>
-            <tag name="hautelook_alice.faker.provider" />
-        </service>
-
     </services>
     
 </container>
