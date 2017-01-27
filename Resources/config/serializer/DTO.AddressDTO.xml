@@ -8,6 +8,6 @@
         <property name="city" expose="true" type="string" />
         <property name="department" expose="true" type="string" />
         <property name="latitude" expose="true" type="float" />
-        <property name="longitude" expose="true" type="float" />
+        <property name="longitude" expose="true" type="float"/>
     </class>
 </serializer>

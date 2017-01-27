@@ -9,8 +9,10 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Vlabs\AddressBundle\Entity\Address;
+use Vlabs\AddressBundle\Entity\City;
 use Vlabs\AddressBundle\Entity\Country;
 use Vlabs\AddressBundle\Form\CityDataTransformer;
+use Vlabs\AddressBundle\Form\EventSubscriber\CityEventSubscriber;
 
 class AddressType extends AbstractType
 {
@@ -39,10 +41,13 @@ class AddressType extends AbstractType
             ->add('street2', TextType::class, [
                 'required' => false
             ])
-            ->add('city', TextType::class)
+            ->add('city', EntityType::class, [
+                'choices' => [],
+                'class' => City::class
+            ])
         ;
 
-        $builder->get('city')->addModelTransformer(new CityDataTransformer($this->cityRepo));
+        $builder->addEventSubscriber(new CityEventSubscriber($this->cityRepo));
     }
 
     /**
