@@ -8,8 +8,8 @@
         </id>
         <field name="name" type="string" length="128"/>
         <field name="zipCode" type="string" length="16"/>
-        <field name="latitude" type="float"/>
-        <field name="longitude" type="float"/>
+        <field name="latitude" type="float" nullable="true"/>
+        <field name="longitude" type="float" nullable="true"/>
 
         <many-to-one field="department" target-entity="Department" inversed-by="cities"/>
 
