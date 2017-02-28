@@ -9,6 +9,7 @@ class DepartmentDTO
     public $id;
     public $name;
     public $code;
+    public $region;
 
     /**
      * @param Department $department
@@ -19,6 +20,7 @@ class DepartmentDTO
         $this->id = $department->getId();
         $this->name = $department->getName();
         $this->code = $department->getCode();
+        $this->region = (new RegionDTO())->fillFromEntity($department->getRegion());
 
         return $this;
     }

@@ -26,7 +26,7 @@ class AddressDTO
         $this->street2      = $address->getStreet2();
         $this->zipCode      = $address->getCity()->getZipCode();
         $this->city         = $address->getCity()->getName();
-        $this->department   = $address->getCity()->getDepartment()->getName();
+        $this->department   = (new DepartmentDTO())->fillFromEntity($address->getCity()->getDepartment());
         $this->latitude     = $address->getLatitude();
         $this->longitude    = $address->getLongitude();
 
