@@ -68,6 +68,9 @@ class CityEventSubscriber implements EventSubscriberInterface
             $form->add('city', EntityType::class, [
                 'choices' => [$this->cityRepo->find($data['city'])],
                 'class' => City::class,
+                'choice_label' => function(City $city){
+                    return sprintf('%s (%s)', $city->getZipCode(), $city->getName());
+                }
             ]);
         }
     }
