@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\RegionListDTO" exclusion-policy="ALL">
+        <property name="regions" expose="true">
+            <type><![CDATA[array<Vlabs\AddressBundle\DTO\RegionDTO>]]></type>
+        </property>
+    </class>
+</serializer>

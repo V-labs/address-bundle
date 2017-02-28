@@ -8,3 +8,8 @@ vlabs_address_get_departments:
     path: /departments
     defaults: { _controller: VlabsAddressBundle:Api/Department:getDepartments }
     methods: GET
+
+vlabs_address_get_regions:
+    path: /regions
+    defaults: { _controller: VlabsAddressBundle:Api/Region:getRegions }
+    methods: GET
