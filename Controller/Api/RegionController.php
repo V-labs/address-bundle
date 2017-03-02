@@ -19,7 +19,7 @@ class RegionController extends FOSRestController
      *  },
      *  statusCodes={
      *      200 = "Returned if successful",
-     *      204 = "Returned if there is no department"
+     *      204 = "Returned if there is no regions"
      *  }
      * )
      *
