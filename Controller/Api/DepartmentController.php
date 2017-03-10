@@ -28,7 +28,7 @@ class DepartmentController extends FOSRestController
     public function getDepartmentsAction()
     {
         $departmentRepo = $this->getDoctrine()->getRepository(Department::class);
-        $departments = $departmentRepo->findBy([], ['name' => 'ASC']);
+        $departments = $departmentRepo->findBy([], ['code' => 'ASC']);
 
         if(empty($departments)){
             return $this->view(null, Response::HTTP_NO_CONTENT);
