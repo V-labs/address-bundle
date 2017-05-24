@@ -13,7 +13,7 @@
         "friendsofsymfony/rest-bundle": "~2.1",
         "jms/serializer-bundle": "~1.1",
         "nelmio/api-doc-bundle": "2.13.*",
-        "guzzlehttp/guzzle": "6.2",
-        "friendsofsymfony/jsrouting-bundle": "1.6"
+        "guzzlehttp/guzzle": "6.2.*",
+        "friendsofsymfony/jsrouting-bundle": "1.6.*"
     }
 }
