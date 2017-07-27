@@ -153,4 +153,12 @@ class Department
     {
         return $this->region;
     }
+
+    /**
+     * @return string
+     */
+    public function getRegionName()
+    {
+        return $this->region->getName();
+    }
 }
