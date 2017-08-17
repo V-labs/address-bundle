@@ -1,5 +1,7 @@
 $(function(){
 
+    //$.fn.select2.defaults.set('language', 'fr');
+
     $('[data-provider="address"]').each(function(){
 
         var source = this;
@@ -23,6 +25,32 @@ $(function(){
 
         }
         $source.replaceWith($select);
+
+        // Needed for french translation
+        // Select2 use by default english translation
+        // TODO: rework this and try to configure select2 to use fr language by default
+        var language = {
+            inputTooLong: function (e) {
+                var t = e.input.length - e.maximum, n = "Supprimez " + t + " caractère";
+                return t !== 1 && (n += "s"), n
+            }, inputTooShort: function (e) {
+                var t = e.minimum - e.input.length, n = "Saisissez " + t + " caractère";
+                return t !== 1 && (n += "s"), n
+            }, loadingMore: function () {
+                return "Chargement de résultats supplémentaires ..."
+            }, maximumSelected: function (e) {
+                var t = "Vous pouvez seulement sélectionner " + e.maximum + " élément";
+                return e.maximum !== 1 && (t += "s"), t
+            }, noResults: function () {
+                return "Aucun résultat trouvé"
+            }, searching: function () {
+                return "Recherche en cours ..."
+            }
+        };
+
+        var tradInputTooShort = $select.data('trans-inputtooshort');
+        if (tradInputTooShort !== undefined)
+            language.inputTooShort = function (args) { return tradInputTooShort; };
 
         $select.select2({
             width: '100%',
@@ -50,7 +78,8 @@ $(function(){
                         results: data['cities']
                     };
                 }).bind(this)
-            }
+            },
+            language: language
         });
 
         $select.change(function(){
