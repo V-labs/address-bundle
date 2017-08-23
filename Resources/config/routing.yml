@@ -6,7 +6,7 @@ vlabs_address_get_cities:
 
 vlabs_address_get_departments:
     path: /departments
-    defaults: { _controller: VlabsAddressBundle:Api/Department:getDepartments }
+    defaults: { _controller: AppBundle:Api\Department:getDepartments }
     methods: GET
 
 vlabs_address_get_regions:
