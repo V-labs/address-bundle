@@ -2,7 +2,7 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <entity name="Vlabs\AddressBundle\Entity\Region" table="vlabs_address_region">
+    <entity name="Vlabs\AddressBundle\Entity\Region" table="address_region">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
