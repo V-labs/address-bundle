@@ -2,6 +2,7 @@
 
 namespace Vlabs\AddressBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\DTO\RegionListDTO;
@@ -15,7 +16,8 @@ class RegionController extends FOSRestController
      *  section="Vlabs",
      *  description="Get the list of regions",
      *  output={
-     *   "class" = "Vlabs\AddressBundle\DTO\RegionListDTO"
+     *   "class" = "Vlabs\AddressBundle\DTO\RegionListDTO",
+     *   "groups" = {"address"}
      *  },
      *  statusCodes={
      *      200 = "Returned if successful",
@@ -36,6 +38,7 @@ class RegionController extends FOSRestController
 
         $regionList = (new RegionListDTO())->fillFromArray($regions);
 
-        return $this->view($regionList, Response::HTTP_OK);
+        return $this->view($regionList, Response::HTTP_OK)
+            ->setContext((new Context())->setGroups(['address']));
     }
 }

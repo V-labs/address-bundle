@@ -2,6 +2,7 @@
 
 namespace Vlabs\AddressBundle\Controller\Api;
 
+use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\DTO\DepartmentListDTO;
@@ -15,7 +16,8 @@ class DepartmentController extends FOSRestController
      *  section="Vlabs",
      *  description="Get the list of departments",
      *  output={
-     *   "class" = "Vlabs\AddressBundle\DTO\DepartmentListDTO"
+     *   "class" = "Vlabs\AddressBundle\DTO\DepartmentListDTO",
+     *   "groups" = {"address"}
      *  },
      *  statusCodes={
      *      200 = "Returned if successful",
@@ -36,6 +38,7 @@ class DepartmentController extends FOSRestController
 
         $departmentList = (new DepartmentListDTO())->fillFromArray($departments);
 
-        return $this->view($departmentList, Response::HTTP_OK);
+        return $this->view($departmentList, Response::HTTP_OK)
+            ->setContext((new Context())->setGroups(['address']));
     }
 }
