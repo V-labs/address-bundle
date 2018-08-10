@@ -3,5 +3,8 @@
     <class name="Vlabs\AddressBundle\DTO\RegionDTO" exclusion-policy="ALL">
         <property name="id" expose="true" type="integer"/>
         <property name="name" expose="true" type="string"/>
+        <property name="country" expose="true">
+            <type><![CDATA[Vlabs\AddressBundle\DTO\CountryDTO]]></type>
+        </property>
     </class>
 </serializer>

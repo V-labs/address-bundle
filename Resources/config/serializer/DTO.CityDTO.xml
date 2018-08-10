@@ -6,5 +6,8 @@
         <property name="zipCode" expose="true" type="string"/>
         <property name="latitude" expose="true" type="float"/>
         <property name="longitude" expose="true" type="float"/>
+        <property name="department" expose="true">
+            <type><![CDATA[Vlabs\AddressBundle\DTO\DepartmentDTO]]></type>
+        </property>
     </class>
 </serializer>

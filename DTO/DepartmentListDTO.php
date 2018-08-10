@@ -2,23 +2,35 @@
 
 namespace Vlabs\AddressBundle\DTO;
 
+use Vlabs\AddressBundle\Entity\Department;
+
 class DepartmentListDTO
 {
     /**
-     * @var array
+     * @var DepartmentDTO[]
      */
-    public $departments = [];
+    private $departments = [];
 
     /**
-     * @param array $departments
-     * @return $this
+     * @param Department[] $departments
+     *
+     * @return DepartmentListDTO
      */
     public function fillFromArray(array $departments)
     {
+        /** @var Department $department */
         foreach ($departments as $department) {
             $this->departments[] = (new DepartmentDTO())->fillFromEntity($department);
         }
 
         return $this;
+    }
+
+    /**
+     * @return DepartmentDTO[]
+     */
+    public function getDepartments()
+    {
+        return $this->departments;
     }
 }

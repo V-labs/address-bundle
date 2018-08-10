@@ -6,30 +6,98 @@ use Vlabs\AddressBundle\Entity\Address;
 
 class AddressDTO
 {
-    public $id;
-    public $street;
-    public $street2;
-    public $zipCode;
-    public $city;
-    public $department;
-    public $latitude;
-    public $longitude;
+    /**
+     * @var int
+     */
+    private $id;
+
+    /**
+     * @var string
+     */
+    private $street;
+
+    /**
+     * @var string
+     */
+    private $street2;
+
+    /**
+     * @var float
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     */
+    private $longitude;
+
+    /**
+     * @var CityDTO
+     */
+    private $city;
 
     /**
      * @param Address $address
-     * @return $this
+     *
+     * @return AddressDTO
      */
     public function fillFromEntity(Address $address)
     {
         $this->id           = $address->getId();
         $this->street       = $address->getStreet();
         $this->street2      = $address->getStreet2();
-        $this->zipCode      = $address->getCity()->getZipCode();
-        $this->city         = $address->getCity()->getName();
-        $this->department   = (new DepartmentDTO())->fillFromEntity($address->getCity()->getDepartment());
         $this->latitude     = $address->getLatitude();
         $this->longitude    = $address->getLongitude();
+        $this->city         = (new CityDTO())->fillFromEntity($address->getCity());
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet()
+    {
+        return $this->street;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStreet2()
+    {
+        return $this->street2;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return CityDTO
+     */
+    public function getCity()
+    {
+        return $this->city;
     }
 }

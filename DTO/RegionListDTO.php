@@ -2,23 +2,35 @@
 
 namespace Vlabs\AddressBundle\DTO;
 
+use Vlabs\AddressBundle\Entity\Region;
+
 class RegionListDTO
 {
     /**
-     * @var array
+     * @var RegionDTO[]
      */
-    public $regions = [];
+    private $regions = [];
 
     /**
-     * @param array $regions
-     * @return $this
+     * @param Region[] $regions
+     *
+     * @return RegionListDTO
      */
     public function fillFromArray(array $regions)
     {
+        /** @var Region $region */
         foreach ($regions as $region) {
             $this->regions[] = (new RegionDTO())->fillFromEntity($region);
         }
 
         return $this;
+    }
+
+    /**
+     * @return RegionDTO[]
+     */
+    public function getRegions()
+    {
+        return $this->regions;
     }
 }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<serializer>
+    <class name="Vlabs\AddressBundle\DTO\CountryDTO" exclusion-policy="ALL">
+        <property name="id" expose="true" type="integer"/>
+        <property name="abbreviation" expose="true" type="string"/>
+        <property name="name" expose="true" type="string"/>
+    </class>
+</serializer>
