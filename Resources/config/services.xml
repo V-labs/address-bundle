@@ -16,6 +16,10 @@
             <tag name="form.type" />
         </service>
 
+        <service id="vlabs_address.command.install" class="Vlabs\AddressBundle\Command\InstallCommand">
+            <tag name="console.command" command="vlabs:address:install" />
+        </service>
+
     </services>
     
 </container>
