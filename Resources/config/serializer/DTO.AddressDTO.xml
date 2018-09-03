@@ -6,7 +6,7 @@
         <property name="street2" expose="true" type="string" groups="address" />
         <property name="latitude" expose="true" type="float" groups="address" />
         <property name="longitude" expose="true" type="float" groups="address" />
-        <property name="city" expose="true" groups="address">
+        <property name="city" expose="true" groups="city">
             <type><![CDATA[Vlabs\AddressBundle\DTO\CityDTO]]></type>
         </property>
     </class>

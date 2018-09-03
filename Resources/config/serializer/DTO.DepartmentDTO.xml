@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <serializer>
     <class name="Vlabs\AddressBundle\DTO\DepartmentDTO" exclusion-policy="ALL" xml-root-name="department">
-        <property name="id" expose="true" type="integer" groups="address" />
-        <property name="name" expose="true" type="string" groups="address" />
-        <property name="code" expose="true" type="string" groups="address" />
-        <property name="region" expose="true" groups="address">
+        <property name="id" expose="true" type="integer" groups="department" />
+        <property name="name" expose="true" type="string" groups="department" />
+        <property name="code" expose="true" type="string" groups="department" />
+        <property name="region" expose="true" groups="region">
             <type><![CDATA[Vlabs\AddressBundle\DTO\RegionDTO]]></type>
         </property>
     </class>

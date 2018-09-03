@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <serializer>
     <class name="Vlabs\AddressBundle\DTO\RegionDTO" exclusion-policy="ALL">
-        <property name="id" expose="true" type="integer" groups="address" />
-        <property name="name" expose="true" type="string" groups="address" />
-        <property name="country" expose="true" groups="address">
+        <property name="id" expose="true" type="integer" groups="region" />
+        <property name="name" expose="true" type="string" groups="region" />
+        <property name="country" expose="true" groups="country">
             <type><![CDATA[Vlabs\AddressBundle\DTO\CountryDTO]]></type>
         </property>
     </class>
