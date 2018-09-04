@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <serializer>
     <class name="Vlabs\AddressBundle\DTO\CityDTO" exclusion-policy="ALL" xml-root-name="city">
-        <property name="id" expose="true" type="integer" groups="city" />
-        <property name="name" expose="true" type="string" groups="city" />
-        <property name="zipCode" expose="true" type="string" groups="city" />
-        <property name="latitude" expose="true" type="float" groups="city" />
-        <property name="longitude" expose="true" type="float" groups="city" />
-        <property name="department" expose="true" groups="department">
+        <property name="id" expose="true" type="integer" groups="city, full_address" />
+        <property name="name" expose="true" type="string" groups="city, full_address" />
+        <property name="zipCode" expose="true" type="string" groups="city, full_address" />
+        <property name="latitude" expose="true" type="float" groups="city, full_address" />
+        <property name="longitude" expose="true" type="float" groups="city, full_address" />
+        <property name="department" expose="true" groups="department, full_address">
             <type><![CDATA[Vlabs\AddressBundle\DTO\DepartmentDTO]]></type>
         </property>
     </class>

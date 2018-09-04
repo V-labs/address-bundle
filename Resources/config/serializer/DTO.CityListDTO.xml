@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <serializer>
     <class name="Vlabs\AddressBundle\DTO\CityListDTO" exclusion-policy="ALL" xml-root-name="city_list">
-        <property name="cities" expose="true" groups="city">
+        <property name="cities" expose="true" groups="city, full_address">
             <type><![CDATA[array<Vlabs\AddressBundle\DTO\CityDTO>]]></type>
         </property>
     </class>
