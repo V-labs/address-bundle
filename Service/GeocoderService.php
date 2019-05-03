@@ -55,10 +55,11 @@ class GeocoderService
         $client = new Client();
 
         /** @var Response $response */
-        $response = $client->get(sprintf('%s%s?address=%s',
+        $response = $client->get(sprintf('%s%s?address=%s&key=%s',
             $this->geocoderBaseUrl,
             $outputFormat,
-            $addressEncoded
+            $addressEncoded,
+            $this->googleApiKey
         ));
 
         if($response->getStatusCode() == \Symfony\Component\HttpFoundation\Response::HTTP_OK)
