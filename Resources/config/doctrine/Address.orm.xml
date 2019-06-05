@@ -4,7 +4,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-    <entity name="Vlabs\AddressBundle\Entity\Address" table="address">
+    <entity name="Vlabs\AddressBundle\Entity\Address" table="vlabs_address_address">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
