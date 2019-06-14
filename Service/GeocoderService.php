@@ -82,7 +82,7 @@ class GeocoderService
 
         if($data->status != 'OK')
         {
-            throw new NoGeocodingFoundForAddressException($data->status);
+            throw new NoGeocodingFoundForAddressException($data->status . ': '. $data->error_message);
         }
 
         try{
