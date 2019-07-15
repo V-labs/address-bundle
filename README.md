@@ -26,7 +26,14 @@ public function registerBundles()
     );
 }
 ```
+### Step 3: Add tbbc error configuration
 
+``` php
+// app/config/config.yml
+imports:
+    - { resource: "@VlabsAddressBundle/Resources/config/packages/tbbc_rest_util.yml" }
+    ...
+```
 
 ### Step 3: Update the configuration
 

@@ -4,6 +4,16 @@ vlabs_address_get_cities:
     options:
         expose: true
 
+vlabs_address_post_cities:
+    path: /cities
+    defaults: { _controller: VlabsAddressBundle:Api/City:postCity }
+    methods: POST
+
+vlabs_address_put_cities:
+    path: /cities/{city_id}
+    defaults: { _controller: VlabsAddressBundle:Api/City:postCity }
+    methods: PUT
+
 vlabs_address_get_departments:
     path: /departments
     defaults: { _controller: VlabsAddressBundle:Api\Department:getDepartments }
