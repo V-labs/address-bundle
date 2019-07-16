@@ -8,24 +8,52 @@ use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\DTO\DepartmentListDTO;
 use Vlabs\AddressBundle\Entity\Department;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 
+/**
+ * Class DepartmentController
+ * @package Vlabs\AddressBundle\Controller\Api
+ */
 class DepartmentController extends FOSRestController
 {
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Get the list of departments",
-     *  output={
-     *   "class" = "Vlabs\AddressBundle\DTO\DepartmentListDTO",
-     *   "groups" = {"address"}
-     *  },
-     *  statusCodes={
-     *      200 = "Returned if successful",
-     *      204 = "Returned if there is no department"
-     *  }
+     * @SWG\Get(
+     *      tags = {"Address"},
+     *      summary = "Get all departments",
+     *      description = "Return a list of all departments.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if successful",
+     *              schema = @SWG\Schema(
+     *                  type = "object",
+     *                  ref = @Model(
+     *                      type = DepartmentListDTO::class,
+     *                      groups = {"address"}
+     *                  )
+     *              )
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          )
+     *      }
      * )
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function getDepartmentsAction()
     {

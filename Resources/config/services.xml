@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="vlabs_address.event_listener.rest_exception.class">Vlabs\AddressBundle\Listener\TbbcRestExceptionListener</parameter>
+        <parameter key="vlabs_address.tbbc_error.form_error">Tbbc\RestUtilBundle\Error\Exception\FormErrorException</parameter>
     </parameters>
 
     <services>
@@ -24,7 +24,7 @@
             <tag name="console.command" command="vlabs:address:install" />
         </service>
 
-        <service id="vlabs_address.event_listener.rest_exception" class="%vlabs_address.event_listener.rest_exception.class%">
+        <service id="vlabs_address.event_listener.rest_exception" class="Vlabs\AddressBundle\Listener\TbbcRestExceptionListener">
             <tag name="kernel.event_subscriber" />
             <tag name="monolog.logger" channel="request" />
             <argument type="service" id="tbbc_rest_util.error.error_resolver" />

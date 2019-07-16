@@ -7,25 +7,57 @@ use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\DTO\RegionListDTO;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Model;
+use Swagger\Annotations as SWG;
 use Vlabs\AddressBundle\Entity\Region;
 
+/**
+ * Class RegionController
+ * @package Vlabs\AddressBundle\Controller\Api
+ */
 class RegionController extends FOSRestController
 {
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Get the list of regions",
-     *  output={
-     *   "class" = "Vlabs\AddressBundle\DTO\RegionListDTO",
-     *   "groups" = {"address"}
-     *  },
-     *  statusCodes={
-     *      200 = "Returned if successful",
-     *      204 = "Returned if there is no regions"
-     *  }
+     * @SWG\Get(
+     *      tags = {"Address"},
+     *      summary = "Get all regions",
+     *      description = "Return a list of all regions.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if successful",
+     *              schema = @SWG\Schema(
+     *                  type = "object",
+     *                  ref = @Model(
+     *                      type = RegionListDTO::class,
+     *                      groups = {"address"}
+     *                  )
+     *              )
+     *          ),
+     *          @SWG\Response(
+     *              response = 204,
+     *              description = "Returned if no regions"
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          )
+     *      }
      * )
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function getRegionsAction()
     {

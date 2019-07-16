@@ -1,8 +1,7 @@
 vlabs_address_get_cities:
     path: /cities
     defaults: { _controller: VlabsAddressBundle:Api/City:getCities }
-    options:
-        expose: true
+    methods: GET
 
 vlabs_address_post_cities:
     path: /cities

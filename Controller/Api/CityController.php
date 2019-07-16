@@ -6,6 +6,7 @@ use FOS\RestBundle\Context\Context;
 use FOS\RestBundle\View\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Tbbc\RestUtilBundle\Error\Exception\FormErrorException;
@@ -13,6 +14,7 @@ use Vlabs\AddressBundle\DTO\CityListDTO;
 use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\Entity\City;
 use Vlabs\AddressBundle\Form\Type\CityType;
+use Swagger\Annotations as SWG;
 
 /**
  * Class CityController
@@ -21,19 +23,49 @@ use Vlabs\AddressBundle\Form\Type\CityType;
 class CityController extends FOSRestController
 {
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Get the list of cities",
-     *  output={
-     *   "class" = "Vlabs\AddressBundle\DTO\CityListDTO",
-     *   "groups" = {"address"}
-     *  },
-     *  statusCodes={
-     *      202 = "Returned if successful"
-     *  }
+     * @SWG\Get(
+     *      tags = {"Address"},
+     *      summary = "Get cities",
+     *      description = "Return a list of all cities filtered by zipCode.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if successful",
+     *              schema = @SWG\Schema(
+     *                  type = "object",
+     *                  ref = @Model(
+     *                      type = CityListDTO::class,
+     *                      groups = {"address"}
+     *                  )
+     *              )
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "q",
+     *              in = "query",
+     *              required = false,
+     *              type = "string",
+     *              description = "The searched city"
+     *          )
+     *      }
      * )
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
     public function getCitiesAction(Request $request)
     {
@@ -53,28 +85,83 @@ class CityController extends FOSRestController
     }
 
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Create a city",
-     *  input="Vlabs\AddressBundle\Form\Type\CityType",
-     *  statusCodes={
-     *      201 = "Returned if created",
-     *      400 = "Returned if the request failed"
-     *  }
+     * @SWG\Post(
+     *      tags = {"Address"},
+     *      summary = "Create a new city",
+     *      description = "Create a new city.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 201,
+     *              description = "Returned if created"
+     *          ),
+     *          @SWG\Response(
+     *              response = 400,
+     *              description = "Returned if an error occurred",
+     *              examples = {
+     *                  400101 = {
+     *                      "http_status_code": 400,
+     *                      "code": 400101,
+     *                      "message": "Cette valeur n'est pas valide.",
+     *                      "extended_message": {
+     *                          "global_errors": {},
+     *                          "property_errors": {
+     *                              "field_name": {
+     *                                  "Cette valeur n'est pas valide."
+     *                              }
+     *                          }
+     *                      },
+     *                      "more_info_url": null
+     *                  }
+     *              }
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Accept-Language",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "fr"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name="form",
+     *              in="body",
+     *              @Model(type=CityType::class)
+     *          )
+     *      }
      * )
      *
-     * @return \FOS\RestBundle\View\View
+     * @param Request $request
+     *
+     * @return View
      */
     public function postCityAction(Request $request)
     {
         $city = new City();
 
-        $form = $this->createForm(CityType::class, $city);
+        $form = $this->createForm(CityType::class, $city, [
+            'csrf_protection' => false,
+        ]);
 
         $form->submit($request->request->all());
 
-        if ($form->isSubmitted() && !$form->isValid()) {
-            throw new FormErrorException($form);
+        if (!$form->isSubmitted() || $form->isSubmitted() && !$form->isValid()) {
+            $formError = $this->getParameter('vlabs_address.tbbc_error.form_error');
+            throw new $formError($form);
         }
 
         $cityRepository = $this->get('doctrine.orm.entity_manager')
@@ -86,14 +173,64 @@ class CityController extends FOSRestController
     }
 
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Update a city",
-     *  input="Vlabs\AddressBundle\Form\Type\CityType",
-     *  statusCodes={
-     *      201 = "Returned if updated",
-     *      400 = "Returned if the request failed"
-     *  }
+     * @SWG\Put(
+     *      tags = {"Address"},
+     *      summary = "Update a city",
+     *      description = "Update a city.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if updated"
+     *          ),
+     *          @SWG\Response(
+     *              response = 400,
+     *              description = "Returned if an error occurred",
+     *              examples = {
+     *                  400101 = {
+     *                      "http_status_code": 400,
+     *                      "code": 400101,
+     *                      "message": "Cette valeur n'est pas valide.",
+     *                      "extended_message": {
+     *                          "global_errors": {},
+     *                          "property_errors": {
+     *                              "field_name": {
+     *                                  "Cette valeur n'est pas valide."
+     *                              }
+     *                          }
+     *                      },
+     *                      "more_info_url": null
+     *                  }
+     *              }
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Accept-Language",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "fr"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name="form",
+     *              in="body",
+     *              @Model(type=CityType::class)
+     *          )
+     *      }
      * )
      *
      * @ParamConverter("city", options={
@@ -102,7 +239,10 @@ class CityController extends FOSRestController
      *      }
      * })
      *
-     * @return \FOS\RestBundle\View\View
+     * @param Request $request
+     * @param City $city
+     *
+     * @return View
      */
     public function putCityAction(Request $request, City $city)
     {
@@ -110,8 +250,9 @@ class CityController extends FOSRestController
 
         $form->submit($request->request->all());
 
-        if ($form->isSubmitted() && !$form->isValid()) {
-            throw new FormErrorException($form);
+        if (!$form->isSubmitted() || $form->isSubmitted() && !$form->isValid()) {
+            $formError = $this->getParameter('vlabs_address.tbbc_error.form_error');
+            throw new $formError($form);
         }
 
         $cityRepository = $this->get('doctrine.orm.entity_manager')
@@ -123,13 +264,43 @@ class CityController extends FOSRestController
     }
 
     /**
-     * @ApiDoc(
-     *  section="Vlabs",
-     *  description="Delete a city",
-     *  statusCodes={
-     *      200 = "Returned if successful",
-     *      409 = "Returned if city is not deletable"
-     *  }
+     * @SWG\Delete(
+     *      tags = {"Address"},
+     *      summary = "Delete a city",
+     *      description = "Delete a city.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if Delete"
+     *          ),
+     *          @SWG\Response(
+     *              response = 409,
+     *              description = "Returned if city cannot be deleted."
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Accept-Language",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "fr"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          )
+     *      }
      * )
      *
      * @ParamConverter("city", options={
@@ -139,11 +310,11 @@ class CityController extends FOSRestController
      * })
      *
      * @param Request $request
-     * @param City    $city
+     * @param City $city
      *
-     * @return \FOS\RestBundle\View\View
+     * @return View
      */
-    public function deleteCityAction(Request $request, City $city): View
+    public function deleteCityAction(Request $request, City $city)
     {
         $cityRepository = $this->get('doctrine.orm.entity_manager')
             ->getRepository('VlabsAddressBundle:City');
