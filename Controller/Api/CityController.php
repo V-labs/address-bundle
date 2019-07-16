@@ -10,6 +10,7 @@ use Nelmio\ApiDocBundle\Annotation\Model;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Tbbc\RestUtilBundle\Error\Exception\FormErrorException;
+use Vlabs\AddressBundle\DTO\CityDTO;
 use Vlabs\AddressBundle\DTO\CityListDTO;
 use Symfony\Component\HttpFoundation\Response;
 use Vlabs\AddressBundle\Entity\City;
@@ -81,7 +82,59 @@ class CityController extends FOSRestController
         $cityList = (new CityListDTO())->fillFromArray($cities);
 
         return $this->view($cityList, Response::HTTP_ACCEPTED)
-            ->setContext((new Context())->setGroups(['address']));
+            ->setContext((new Context())->setGroups(['city']));
+    }
+
+    /**
+     * @SWG\Get(
+     *      tags = {"Address"},
+     *      summary = "Get city",
+     *      description = "Return a specific city.",
+     *      responses = {
+     *          @SWG\Response(
+     *              response = 200,
+     *              description = "Returned if successful",
+     *              schema = @SWG\Schema(
+     *                  type = "object",
+     *                  ref = @Model(
+     *                      type = CityDTO::class,
+     *                      groups = {"address"}
+     *                  )
+     *              )
+     *          )
+     *      },
+     *      parameters = {
+     *          @SWG\Parameter(
+     *              name = "Accept",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          ),
+     *          @SWG\Parameter(
+     *              name = "Content-Type",
+     *              in = "header",
+     *              required = true,
+     *              type = "string",
+     *              default = "application/json"
+     *          )
+     *      }
+     * )
+     *
+     * @ParamConverter("city", options={
+     *     "mapping": {
+     *          "city_id": "id"
+     *      }
+     * })
+     *
+     * @return View
+     */
+    public function getCityAction(Request $request, City $city)
+    {
+        $city = (new CityDTO())->fillFromEntity($city);
+
+        return $this->view($city, Response::HTTP_OK)
+            ->setContext((new Context())->setGroups(['city']));
     }
 
     /**
@@ -246,7 +299,9 @@ class CityController extends FOSRestController
      */
     public function putCityAction(Request $request, City $city)
     {
-        $form = $this->createForm(CityType::class, $city);
+        $form = $this->createForm(CityType::class, $city, [
+            'csrf_protection' => false,
+        ]);
 
         $form->submit($request->request->all());
 
@@ -258,7 +313,7 @@ class CityController extends FOSRestController
         $cityRepository = $this->get('doctrine.orm.entity_manager')
             ->getRepository('VlabsAddressBundle:City');
 
-        $cityRepository->remove($city);
+        $cityRepository->save($city);
 
         return $this->view(null, Response::HTTP_OK);
     }

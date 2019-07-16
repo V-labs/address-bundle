@@ -29,7 +29,8 @@ class CityType extends AbstractType
                 'property_path' => 'zipCode',
                 'required'      => true
             ])
-            ->add('department', EntityType::class, [
+            ->add('department_id', EntityType::class, [
+                'property_path' => 'department',
                 'class'         => Department::class,
                 'required'      => true,
                 'choice_label'  => function (Department $department) {
