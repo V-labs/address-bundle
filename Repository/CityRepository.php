@@ -2,8 +2,35 @@
 
 namespace Vlabs\AddressBundle\Repository;
 
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Vlabs\AddressBundle\Entity\City;
+use Vlabs\AddressBundle\Exception\UnableToDeleteException;
+
 class CityRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * @param City $city
+     */
+    public function save(City $city)
+    {
+        $this->_em->persist($city);
+        $this->_em->flush();
+    }
+
+    /**
+     * @param City $city
+     * @throws UnableToDeleteException
+     */
+    public function remove(City $city)
+    {
+        try{
+            $this->_em->remove($city);
+            $this->_em->flush();
+        }catch(ForeignKeyConstraintViolationException $e){
+            throw new UnableToDeleteException('Unable to delete city with related address');
+        }
+    }
+
     /**
      * @return int
      */

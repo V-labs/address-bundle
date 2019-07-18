@@ -1,0 +1,13 @@
+Vlabs\AddressBundle\Entity\City:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: [name, zipCode]
+    properties:
+        name:
+            - NotNull: ~
+            - NotBlank: ~
+        zipCode:
+            - NotNull: ~
+            - NotBlank: ~
+        department:
+            - NotNull: ~
+            - NotBlank: ~

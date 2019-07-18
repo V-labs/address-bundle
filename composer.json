@@ -2,6 +2,7 @@
     "name": "vlabs/address-bundle",
     "license": "proprietary",
     "type": "symfony-bundle",
+    "version": "dev-master",
     "autoload": {
         "psr-4": {
             "Vlabs\\AddressBundle\\": ""
@@ -14,8 +15,9 @@
         "symfony/http-kernel": ">=3.0.0",
         "friendsofsymfony/rest-bundle": ">=2.1.0",
         "jms/serializer-bundle": ">=1.1.0",
-        "nelmio/api-doc-bundle": ">=2.13.0",
+        "nelmio/api-doc-bundle": ">=3.2",
         "guzzlehttp/guzzle": ">=6.2.0",
-        "friendsofsymfony/jsrouting-bundle": ">=1.6.0"
+        "friendsofsymfony/jsrouting-bundle": ">=1.6.0",
+        "tbbc/rest-util-bundle": ">=1.0"
     }
 }

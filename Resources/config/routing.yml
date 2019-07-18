@@ -1,12 +1,31 @@
 vlabs_address_get_cities:
     path: /cities
     defaults: { _controller: VlabsAddressBundle:Api/City:getCities }
-    options:
-        expose: true
+    methods: GET
+
+vlabs_address_post_city:
+    path: /cities
+    defaults: { _controller: VlabsAddressBundle:Api/City:postCity }
+    methods: POST
+
+vlabs_address_get_city:
+    path: /cities/{city_id}
+    defaults: { _controller: VlabsAddressBundle:Api/City:getCity }
+    methods: GET
+
+vlabs_address_put_city:
+    path: /cities/{city_id}
+    defaults: { _controller: VlabsAddressBundle:Api/City:postCity }
+    methods: PUT
+
+vlabs_address_delete_city:
+    path: /cities/{city_id}
+    defaults: { _controller: VlabsAddressBundle:Api/City:deleteCity }
+    methods: DELETE
 
 vlabs_address_get_departments:
     path: /departments
-    defaults: { _controller: VlabsAddressBundle:Api\Department:getDepartments }
+    defaults: { _controller: VlabsAddressBundle:Api/Department:getDepartments }
     methods: GET
 
 vlabs_address_get_regions:
