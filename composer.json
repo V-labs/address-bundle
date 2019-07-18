@@ -2,7 +2,6 @@
     "name": "vlabs/address-bundle",
     "license": "proprietary",
     "type": "symfony-bundle",
-    "version": "dev-master",
     "autoload": {
         "psr-4": {
             "Vlabs\\AddressBundle\\": ""
