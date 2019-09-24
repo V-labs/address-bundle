@@ -54,20 +54,19 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
     }
 
     /**
-     * @param $zipCode
+     * @param $search
      * @return array
      */
-    public function searchByZipCode($zipCode)
+    public function searchByZipCode($search)
     {
         $qb = $this->_em->createQueryBuilder();
 
         $qb
             ->select('c')
             ->from($this->_entityName, 'c')
-            ->where('c.zipCode LIKE :zipCode')
-            ->setParameter('zipCode', sprintf('%s%%', $zipCode))
-            ->orderBy('c.zipCode', 'ASC')
-            ->addOrderBy('c.name', 'ASC')
+            ->where('(c.zipCode LIKE :search) OR (c.name LIKE :search)')
+            ->setParameter('search', sprintf('%s%%', $search))
+            ->orderBy('c.name', 'ASC')
             ->setMaxResults(50)
         ;
 
