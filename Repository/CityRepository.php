@@ -57,7 +57,7 @@ class CityRepository extends \Doctrine\ORM\EntityRepository
      * @param $search
      * @return array
      */
-    public function searchByZipCode($search)
+    public function search($search)
     {
         $qb = $this->_em->createQueryBuilder();
 
