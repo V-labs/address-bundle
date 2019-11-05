@@ -15,7 +15,7 @@ vlabs_address_get_city:
 
 vlabs_address_put_city:
     path: /cities/{city_id}
-    defaults: { _controller: VlabsAddressBundle:Api/City:postCity }
+    defaults: { _controller: VlabsAddressBundle:Api/City:putCity }
     methods: PUT
 
 vlabs_address_delete_city:
