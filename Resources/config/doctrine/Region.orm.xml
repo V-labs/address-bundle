@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+<doctrine-mapping
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+>
 
     <entity name="Vlabs\AddressBundle\Entity\Region" table="vlabs_address_region">
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>
         </id>
         <field name="name" type="string" column="name" length="128"/>
+        <field name="slug" type="string" unique="true">
+            <gedmo:slug unique="true" updatable="false" fields="name" />
+        </field>
 
         <one-to-many field="departments" target-entity="Department" mapped-by="region"/>
 

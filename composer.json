@@ -17,6 +17,7 @@
         "nelmio/api-doc-bundle": ">=3.2",
         "guzzlehttp/guzzle": ">=6.2.0",
         "friendsofsymfony/jsrouting-bundle": ">=1.6.0",
-        "tbbc/rest-util-bundle": ">=1.0"
+        "tbbc/rest-util-bundle": ">=1.0",
+        "cocur/slugify": "3.2"
     }
 }

@@ -19,6 +19,9 @@ class Region
      */
     private $name;
 
+    /** @var string */
+    private $slug;
+
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
@@ -124,5 +127,21 @@ class Region
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 }

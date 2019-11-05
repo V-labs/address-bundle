@@ -12,6 +12,7 @@ use Vlabs\AddressBundle\Entity\Country;
 use Vlabs\AddressBundle\Entity\Department;
 use Vlabs\AddressBundle\Entity\Region;
 use Symfony\Component\Console\Input\InputOption;
+use Cocur\Slugify\Slugify;
 
 class InstallCommand extends ContainerAwareCommand
 {
@@ -25,6 +26,7 @@ class InstallCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $slugify = new Slugify();
         $finder = new Finder();
         $finder->files()->in(__DIR__.'/../Resources/data');
 
@@ -62,6 +64,7 @@ class InstallCommand extends ContainerAwareCommand
                 if (!in_array($csvRegion, $csvRegions) && !empty($csvRegion)) {
                     $region = new Region();
                     $region->setName($csvRegion);
+                    $region->setSlug($slugify->slugify($csvRegion));
                     $region->setCountry($country);
                     $this->getContainer()->get('doctrine.orm.entity_manager')->persist($region);
                     $regions[] = $region;
