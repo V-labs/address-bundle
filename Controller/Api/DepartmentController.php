@@ -67,6 +67,6 @@ class DepartmentController extends FOSRestController
         $departmentList = (new DepartmentListDTO())->fillFromArray($departments);
 
         return $this->view($departmentList, Response::HTTP_OK)
-            ->setContext((new Context())->setGroups(['address']));
+            ->setContext((new Context())->setGroups(['department']));
     }
 }
